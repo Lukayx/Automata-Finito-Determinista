@@ -138,7 +138,7 @@
     <ClInclude Include="Form1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Header1.h" />
+    <ClInclude Include="ventanaTransiciones.h" />
     <ClInclude Include="Header2.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />

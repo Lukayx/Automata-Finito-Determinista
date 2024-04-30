@@ -3,7 +3,7 @@
 // uncomment to execute the rk1-utils:
 //    #include "rk1_Utils_demo.h"  // shows how the rk1-utils can be used
 
-#include "Header1.h"
+
 #include "Header2.h"
 
 namespace CppCLRWinFormsProject {
@@ -48,11 +48,8 @@ namespace CppCLRWinFormsProject {
   private: System::Windows::Forms::Label^ label1;
   private: System::Windows::Forms::Label^ label2;
   private: System::Windows::Forms::Label^ label3;
-  private: System::Windows::Forms::Label^ label4;
-  private: System::Windows::Forms::Label^ label5;
-
+  private: System::Windows::Forms::TextBox^ txt_estadoInicial;
   private: System::Windows::Forms::TextBox^ txt_estadosFinales;
-  private: System::Windows::Forms::TextBox^ txt_simbolosTransiciones;
   private: System::Windows::Forms::Button^ boton_transiciones;
   private: System::Windows::Forms::Label^ Titulo1;
   private: System::Windows::Forms::Label^ Titulo2;
@@ -60,12 +57,11 @@ namespace CppCLRWinFormsProject {
   private: System::Windows::Forms::Button^ boton_usarAFD;
   private: System::Windows::Forms::Button^ boton_leerPalabra;
   private: System::Windows::Forms::Button^ boton_limpiarInfo;
-  private: System::Windows::Forms::ComboBox^ comboBox_estadoInicial;
-
-  private: System::Windows::Forms::ComboBox^ comboBox_estados;
   private: ArrayList^ arregloSimbolos = gcnew ArrayList();
   private: array<int>^ nodosYestados;
   private: int estadoInicial;
+
+
 
 
 
@@ -88,10 +84,7 @@ namespace CppCLRWinFormsProject {
         this->label1 = (gcnew System::Windows::Forms::Label());
         this->label2 = (gcnew System::Windows::Forms::Label());
         this->label3 = (gcnew System::Windows::Forms::Label());
-        this->label4 = (gcnew System::Windows::Forms::Label());
-        this->label5 = (gcnew System::Windows::Forms::Label());
         this->txt_estadosFinales = (gcnew System::Windows::Forms::TextBox());
-        this->txt_simbolosTransiciones = (gcnew System::Windows::Forms::TextBox());
         this->boton_transiciones = (gcnew System::Windows::Forms::Button());
         this->Titulo1 = (gcnew System::Windows::Forms::Label());
         this->Titulo2 = (gcnew System::Windows::Forms::Label());
@@ -99,8 +92,7 @@ namespace CppCLRWinFormsProject {
         this->boton_usarAFD = (gcnew System::Windows::Forms::Button());
         this->boton_leerPalabra = (gcnew System::Windows::Forms::Button());
         this->boton_limpiarInfo = (gcnew System::Windows::Forms::Button());
-        this->comboBox_estadoInicial = (gcnew System::Windows::Forms::ComboBox());
-        this->comboBox_estados = (gcnew System::Windows::Forms::ComboBox());
+        this->txt_estadoInicial = (gcnew System::Windows::Forms::TextBox());
         this->SuspendLayout();
         // 
         // out_textBox
@@ -111,7 +103,7 @@ namespace CppCLRWinFormsProject {
         this->out_textBox->Location = System::Drawing::Point(514, 22);
         this->out_textBox->Multiline = true;
         this->out_textBox->Name = L"out_textBox";
-        this->out_textBox->Size = System::Drawing::Size(346, 335);
+        this->out_textBox->Size = System::Drawing::Size(347, 335);
         this->out_textBox->TabIndex = 0;
         this->out_textBox->TextChanged += gcnew System::EventHandler(this, &Form1::out_textBox_TextChanged);
         // 
@@ -120,86 +112,49 @@ namespace CppCLRWinFormsProject {
         this->label1->AutoSize = true;
         this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
             static_cast<System::Byte>(0)));
-        this->label1->Location = System::Drawing::Point(57, 63);
+        this->label1->Location = System::Drawing::Point(73, 70);
         this->label1->Name = L"label1";
-        this->label1->Size = System::Drawing::Size(125, 15);
-        this->label1->TabIndex = 1;
-        this->label1->Text = L"Cantidad de estados: ";
+        this->label1->Size = System::Drawing::Size(83, 15);
+        this->label1->TabIndex = 2;
+        this->label1->Text = L"Estado Inicial:";
         // 
         // label2
         // 
         this->label2->AutoSize = true;
         this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
             static_cast<System::Byte>(0)));
-        this->label2->Location = System::Drawing::Point(71, 100);
+        this->label2->Location = System::Drawing::Point(73, 107);
         this->label2->Name = L"label2";
-        this->label2->Size = System::Drawing::Size(80, 15);
-        this->label2->TabIndex = 2;
-        this->label2->Text = L"Estado Inicial";
+        this->label2->Size = System::Drawing::Size(97, 15);
+        this->label2->TabIndex = 3;
+        this->label2->Text = L"Estados Finales:";
         // 
         // label3
         // 
         this->label3->AutoSize = true;
         this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
             static_cast<System::Byte>(0)));
-        this->label3->Location = System::Drawing::Point(182, 101);
+        this->label3->Location = System::Drawing::Point(57, 267);
         this->label3->Name = L"label3";
-        this->label3->Size = System::Drawing::Size(94, 15);
-        this->label3->TabIndex = 3;
-        this->label3->Text = L"Estados Finales";
-        // 
-        // label4
-        // 
-        this->label4->AutoSize = true;
-        this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-            static_cast<System::Byte>(0)));
-        this->label4->Location = System::Drawing::Point(303, 100);
-        this->label4->Name = L"label4";
-        this->label4->Size = System::Drawing::Size(128, 15);
-        this->label4->TabIndex = 4;
-        this->label4->Text = L"Simbolos transiciones";
-        // 
-        // label5
-        // 
-        this->label5->AutoSize = true;
-        this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-            static_cast<System::Byte>(0)));
-        this->label5->Location = System::Drawing::Point(57, 272);
-        this->label5->Name = L"label5";
-        this->label5->Size = System::Drawing::Size(146, 15);
-        this->label5->TabIndex = 5;
-        this->label5->Text = L"Ingrese la palabra a leer: ";
+        this->label3->Size = System::Drawing::Size(146, 15);
+        this->label3->TabIndex = 5;
+        this->label3->Text = L"Ingrese la palabra a leer: ";
         // 
         // txt_estadosFinales
         // 
-        this->txt_estadosFinales->Enabled = false;
         this->txt_estadosFinales->ForeColor = System::Drawing::SystemColors::ScrollBar;
-        this->txt_estadosFinales->Location = System::Drawing::Point(179, 122);
+        this->txt_estadosFinales->Location = System::Drawing::Point(187, 106);
         this->txt_estadosFinales->Name = L"txt_estadosFinales";
-        this->txt_estadosFinales->Size = System::Drawing::Size(100, 20);
+        this->txt_estadosFinales->Size = System::Drawing::Size(242, 20);
         this->txt_estadosFinales->TabIndex = 7;
-        this->txt_estadosFinales->Text = L"Ejemplo: 2,3,5";
+        this->txt_estadosFinales->Text = L"Ejemplo: 3,5,7";
         this->txt_estadosFinales->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
         this->txt_estadosFinales->Enter += gcnew System::EventHandler(this, &Form1::txt_estadosFinales_Enter);
         this->txt_estadosFinales->Leave += gcnew System::EventHandler(this, &Form1::txt_estadosFinales_Leave);
         // 
-        // txt_simbolosTransiciones
-        // 
-        this->txt_simbolosTransiciones->Enabled = false;
-        this->txt_simbolosTransiciones->ForeColor = System::Drawing::SystemColors::ScrollBar;
-        this->txt_simbolosTransiciones->Location = System::Drawing::Point(302, 122);
-        this->txt_simbolosTransiciones->Name = L"txt_simbolosTransiciones";
-        this->txt_simbolosTransiciones->Size = System::Drawing::Size(129, 20);
-        this->txt_simbolosTransiciones->TabIndex = 8;
-        this->txt_simbolosTransiciones->Text = L"Ejemplo: a,b,c";
-        this->txt_simbolosTransiciones->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-        this->txt_simbolosTransiciones->Enter += gcnew System::EventHandler(this, &Form1::txt_simbolos_transiciones_Enter);
-        this->txt_simbolosTransiciones->Leave += gcnew System::EventHandler(this, &Form1::txt_simbolosTransiciones_Leave);
-        // 
         // boton_transiciones
         // 
-        this->boton_transiciones->Enabled = false;
-        this->boton_transiciones->Location = System::Drawing::Point(173, 162);
+        this->boton_transiciones->Location = System::Drawing::Point(178, 141);
         this->boton_transiciones->Name = L"boton_transiciones";
         this->boton_transiciones->Size = System::Drawing::Size(149, 37);
         this->boton_transiciones->TabIndex = 9;
@@ -212,7 +167,7 @@ namespace CppCLRWinFormsProject {
         this->Titulo1->AutoSize = true;
         this->Titulo1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
             static_cast<System::Byte>(0)));
-        this->Titulo1->Location = System::Drawing::Point(46, 22);
+        this->Titulo1->Location = System::Drawing::Point(46, 32);
         this->Titulo1->Name = L"Titulo1";
         this->Titulo1->Size = System::Drawing::Size(410, 20);
         this->Titulo1->TabIndex = 10;
@@ -223,7 +178,7 @@ namespace CppCLRWinFormsProject {
         this->Titulo2->AutoSize = true;
         this->Titulo2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
             static_cast<System::Byte>(0)));
-        this->Titulo2->Location = System::Drawing::Point(119, 225);
+        this->Titulo2->Location = System::Drawing::Point(119, 220);
         this->Titulo2->Name = L"Titulo2";
         this->Titulo2->Size = System::Drawing::Size(265, 20);
         this->Titulo2->TabIndex = 11;
@@ -234,17 +189,17 @@ namespace CppCLRWinFormsProject {
         this->txt_palabra->BackColor = System::Drawing::Color::White;
         this->txt_palabra->Enabled = false;
         this->txt_palabra->ForeColor = System::Drawing::SystemColors::ScrollBar;
-        this->txt_palabra->Location = System::Drawing::Point(209, 271);
+        this->txt_palabra->Location = System::Drawing::Point(209, 266);
         this->txt_palabra->Name = L"txt_palabra";
         this->txt_palabra->Size = System::Drawing::Size(232, 20);
         this->txt_palabra->TabIndex = 12;
-        this->txt_palabra->Text = L"Ejemplo: \"9\"";
+        this->txt_palabra->Text = L"Ejemplo: \"00110100\"";
         this->txt_palabra->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
         // 
         // boton_usarAFD
         // 
         this->boton_usarAFD->Enabled = false;
-        this->boton_usarAFD->Location = System::Drawing::Point(50, 314);
+        this->boton_usarAFD->Location = System::Drawing::Point(50, 309);
         this->boton_usarAFD->Name = L"boton_usarAFD";
         this->boton_usarAFD->Size = System::Drawing::Size(118, 37);
         this->boton_usarAFD->TabIndex = 13;
@@ -255,7 +210,7 @@ namespace CppCLRWinFormsProject {
         // boton_leerPalabra
         // 
         this->boton_leerPalabra->Enabled = false;
-        this->boton_leerPalabra->Location = System::Drawing::Point(195, 314);
+        this->boton_leerPalabra->Location = System::Drawing::Point(195, 309);
         this->boton_leerPalabra->Name = L"boton_leerPalabra";
         this->boton_leerPalabra->Size = System::Drawing::Size(118, 37);
         this->boton_leerPalabra->TabIndex = 14;
@@ -266,7 +221,7 @@ namespace CppCLRWinFormsProject {
         // boton_limpiarInfo
         // 
         this->boton_limpiarInfo->Enabled = false;
-        this->boton_limpiarInfo->Location = System::Drawing::Point(338, 314);
+        this->boton_limpiarInfo->Location = System::Drawing::Point(338, 309);
         this->boton_limpiarInfo->Name = L"boton_limpiarInfo";
         this->boton_limpiarInfo->Size = System::Drawing::Size(118, 37);
         this->boton_limpiarInfo->TabIndex = 15;
@@ -274,38 +229,24 @@ namespace CppCLRWinFormsProject {
         this->boton_limpiarInfo->UseVisualStyleBackColor = true;
         this->boton_limpiarInfo->Click += gcnew System::EventHandler(this, &Form1::boton_limpiarInfo_Click);
         // 
-        // comboBox_estadoInicial
+        // txt_estadoInicial
         // 
-        this->comboBox_estadoInicial->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-        this->comboBox_estadoInicial->Enabled = false;
-        this->comboBox_estadoInicial->FormattingEnabled = true;
-        this->comboBox_estadoInicial->Location = System::Drawing::Point(66, 121);
-        this->comboBox_estadoInicial->Name = L"comboBox_estadoInicial";
-        this->comboBox_estadoInicial->Size = System::Drawing::Size(91, 21);
-        this->comboBox_estadoInicial->TabIndex = 16;
-        // 
-        // comboBox_estados
-        // 
-        this->comboBox_estados->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-        this->comboBox_estados->FormattingEnabled = true;
-        this->comboBox_estados->Items->AddRange(gcnew cli::array< System::Object^  >(22) {
-            L"1", L"2", L"3", L"4", L"5", L"6", L"7",
-                L"8", L"9", L"10", L"11", L"12", L"13", L"14", L"15", L"16", L"17", L"18", L"19", L"20", L"21", L"22"
-        });
-        this->comboBox_estados->Location = System::Drawing::Point(209, 62);
-        this->comboBox_estados->MaxLength = 2;
-        this->comboBox_estados->Name = L"comboBox_estados";
-        this->comboBox_estados->Size = System::Drawing::Size(232, 21);
-        this->comboBox_estados->TabIndex = 17;
-        this->comboBox_estados->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::comboBox_estados_SelectedIndexChanged);
+        this->txt_estadoInicial->ForeColor = System::Drawing::SystemColors::ScrollBar;
+        this->txt_estadoInicial->Location = System::Drawing::Point(187, 69);
+        this->txt_estadoInicial->Name = L"txt_estadoInicial";
+        this->txt_estadoInicial->Size = System::Drawing::Size(242, 20);
+        this->txt_estadoInicial->TabIndex = 16;
+        this->txt_estadoInicial->Text = L"Ingrese el numero del estado inicial";
+        this->txt_estadoInicial->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+        this->txt_estadoInicial->Enter += gcnew System::EventHandler(this, &Form1::txt_estadoInicial_Enter);
+        this->txt_estadoInicial->Leave += gcnew System::EventHandler(this, &Form1::txt_estadoInicial_Leave);
         // 
         // Form1
         // 
         this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
         this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-        this->ClientSize = System::Drawing::Size(886, 385);
-        this->Controls->Add(this->comboBox_estados);
-        this->Controls->Add(this->comboBox_estadoInicial);
+        this->ClientSize = System::Drawing::Size(887, 385);
+        this->Controls->Add(this->txt_estadoInicial);
         this->Controls->Add(this->boton_limpiarInfo);
         this->Controls->Add(this->boton_leerPalabra);
         this->Controls->Add(this->boton_usarAFD);
@@ -313,10 +254,7 @@ namespace CppCLRWinFormsProject {
         this->Controls->Add(this->Titulo2);
         this->Controls->Add(this->Titulo1);
         this->Controls->Add(this->boton_transiciones);
-        this->Controls->Add(this->txt_simbolosTransiciones);
         this->Controls->Add(this->txt_estadosFinales);
-        this->Controls->Add(this->label5);
-        this->Controls->Add(this->label4);
         this->Controls->Add(this->label3);
         this->Controls->Add(this->label2);
         this->Controls->Add(this->label1);
@@ -355,76 +293,48 @@ namespace CppCLRWinFormsProject {
   }
   */
 
-private: System::Void comboBox_estados_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-    int selectedIndex = comboBox_estados->SelectedIndex;
-
-    if (selectedIndex >= 0) {
-        //MessageBox::Show(String::Format("El indice seleccionado es {0}", selectedIndex+1));
-        nodosYestados = gcnew array<int>(selectedIndex);
-        comboBox_estadoInicial->Enabled = true;
-        comboBox_estadoInicial->Items->Clear();
-        comboBox_estadoInicial->Text = "";
-        for (size_t i = 0; i <= selectedIndex; i++)
-        {
-            comboBox_estadoInicial->Items->Add(i);
-        }
-        txt_estadosFinales->Enabled = true;
-        txt_estadosFinales->Text = "Ejemplo: 2,3,5";
-        txt_estadosFinales->ForeColor = System::Drawing::SystemColors::ScrollBar;
-        txt_simbolosTransiciones->Enabled = true;
-        txt_simbolosTransiciones->Text = "Ejemplo: a,b,c";
-        txt_simbolosTransiciones->ForeColor = System::Drawing::SystemColors::ScrollBar;
-        boton_transiciones->Enabled = true;
-        
-    }
-    else {
-        comboBox_estadoInicial->Enabled = false;
-        txt_estadosFinales->Enabled = false;
-        txt_simbolosTransiciones->Enabled = false;
-    }
-
-}
-
 private: System::Void boton_Transiciones_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    String^ transiciones = txt_simbolosTransiciones->Text;
+    String^ estadoInicial = txt_estadoInicial->Text;
     String^ estadosFinales = txt_estadosFinales->Text;
-    estadoInicial = comboBox_estadoInicial->SelectedIndex;
-
-    array<String^>^ simbolos = transiciones->Split(',');
-    for each (String^ simbolo in simbolos)
-    {
-        if (simbolo->Length == 1)
-        {
-            arregloSimbolos->Add(simbolo);
-        }
-        else
-        {
-            arregloSimbolos->Clear();
-            MessageBox::Show(String::Format("Error de formato en simbolos transiciones."));
-            return;
-        }
-    }
     int numero;
+    if (!Int32::TryParse(estadoInicial, numero) || numero < 0)
+    {
+        MessageBox::Show(String::Format("Error de formato en estado inicial.\n Verifique que sea un estado inicial valido"));
+        return;
+    }
     array<String^>^ finales = estadosFinales->Split(',');
     for each (String^ nodo in finales)
     {
-        if (Int32::TryParse(nodo, numero)) 
+        if (!Int32::TryParse(nodo, numero) || numero < 0) 
         {
-            nodosYestados[numero] = 1;
-        }
-        else
-        {
-            arregloSimbolos->Clear();
-            nodosYestados->Clear;
-            MessageBox::Show(String::Format("Error de formato en estados finales."));
+            MessageBox::Show(String::Format("Error de formato en estados finales.\n Verifique que los numeros sean positivos y estén separados por comas."));
             return;
         }
+    }
+
+
+
+}
+
+private: System::Void txt_estadoInicial_Enter(System::Object^ sender, System::EventArgs^ e) {
+    if (txt_estadoInicial->Text == "Ingrese el numero del estado inicial")
+    {
+        txt_estadoInicial->Text = "";
+        txt_estadoInicial->ForeColor = System::Drawing::SystemColors::MenuText;
+    }
+}
+
+private: System::Void txt_estadoInicial_Leave(System::Object^ sender, System::EventArgs^ e) {
+    if (txt_estadoInicial->Text == "")
+    {
+        txt_estadoInicial->ForeColor = System::Drawing::SystemColors::ScrollBar;
+        txt_estadoInicial->Text = "Ingrese el numero del estado inicial";
     }
 }
 
 private: System::Void txt_estadosFinales_Enter(System::Object^ sender, System::EventArgs^ e) {
-    if (txt_estadosFinales->Text == "Ejemplo: 2,3,5")
+    if (txt_estadosFinales->Text == "Ejemplo: 3,5,7")
     {
         txt_estadosFinales->Text = "";
         txt_estadosFinales->ForeColor = System::Drawing::SystemColors::MenuText;
@@ -435,36 +345,20 @@ private: System::Void txt_estadosFinales_Leave(System::Object^ sender, System::E
     if (txt_estadosFinales->Text == "")
     {
         txt_estadosFinales->ForeColor = System::Drawing::SystemColors::ScrollBar;
-        txt_estadosFinales->Text = "Ejemplo: 2,3,5";
-    }
-}
-
-private: System::Void txt_simbolos_transiciones_Enter(System::Object^ sender, System::EventArgs^ e) {
-    if (txt_simbolosTransiciones->Text == "Ejemplo: a,b,c") 
-    {
-        txt_simbolosTransiciones->Text = "";
-        txt_simbolosTransiciones->ForeColor = System::Drawing::SystemColors::MenuText;
-    } 
-}
-
-private: System::Void txt_simbolosTransiciones_Leave(System::Object^ sender, System::EventArgs^ e) {
-    if(txt_simbolosTransiciones->Text == "")
-    {
-        txt_simbolosTransiciones->ForeColor = System::Drawing::SystemColors::ScrollBar;
-        txt_simbolosTransiciones->Text = "Ejemplo: a,b,c";
+        txt_estadosFinales->Text = "Ejemplo: 3,5,7";
     }
 }
 
 private: System::Void CheckButtonEnabled() {
-    if (txt_estadosFinales->Text != "" && txt_simbolosTransiciones->Text != "" && comboBox_estadoInicial->SelectedIndex != -1) {
+    if (txt_estadosFinales->Text != "" && txt_estadoInicial->Text != "") 
+    {
         boton_transiciones->Enabled = true;
     }
-    else {
+    else 
+    {
         boton_transiciones->Enabled = false;
     }
 }
-
-
 
 private: System::Void boton_usarAFD_Click(System::Object^ sender, System::EventArgs^ e) {
 }
